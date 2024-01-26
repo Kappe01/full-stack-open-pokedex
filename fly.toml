@@ -23,7 +23,9 @@ primary_region = 'arn'
   restart_limit = 0
   timeout = "2s"
 
-
+[[services.ports]]
+  handlers = ["http"]
+  port = 3000
 
 [http_service]
   internal_port = 3000
