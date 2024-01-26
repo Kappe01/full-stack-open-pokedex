@@ -17,6 +17,13 @@ primary_region = 'arn'
 [deploy]
   strategy = "bluegreen"
 
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
+
+
 
 [http_service]
   internal_port = 3000
