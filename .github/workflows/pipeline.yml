@@ -1,6 +1,8 @@
 name: Simple pipeline!
 
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches:
       - main
@@ -30,6 +32,13 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000
+    healthcheck:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check the deployed service URL
+          uses: jtalk/url-health-check-action@v3
+          with:
+            url: https://fullstack-pokedex-kappe.fly.dev/
 
     tag_release:
       if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
